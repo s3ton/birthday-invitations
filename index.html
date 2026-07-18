@@ -74,6 +74,128 @@
   .star{position:absolute; width:2px; height:2px; background:var(--parchment); border-radius:50%; animation:twinkle 4s ease-in-out infinite}
   @keyframes twinkle{0%,100%{opacity:.1}50%{opacity:.8}}
 
+  /* ----------  FLYING BROOMS & OWLS  ---------- */
+  .flyers{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+
+  /* shared flight arc — diagonal across the whole viewport */
+  .flyer{
+    position:absolute; top:0; left:0;
+    will-change:transform, opacity;
+  }
+
+  /* — BROOMSTICK (pure CSS) — */
+  .broom{width:90px; height:14px; transform-origin:50% 50%}
+  .broom .shaft{
+    position:absolute; left:0; top:5px;
+    width:64px; height:4px;
+    background:linear-gradient(180deg, #6e4a25 0%, #3a2c16 100%);
+    border-radius:2px;
+    box-shadow:0 1px 0 rgba(255,255,255,.12) inset, 0 2px 4px rgba(0,0,0,.5);
+  }
+  .broom .twigs{
+    position:absolute; right:0; top:-2px;
+    width:28px; height:18px;
+    background:
+      repeating-linear-gradient(78deg, #b5801a 0 2px, #8a5e0f 2px 4px, #5a3c08 4px 5px),
+      linear-gradient(180deg, #c89a2c 0%, #6e4a14 100%);
+    clip-path:polygon(0 4%, 100% 26%, 100% 74%, 0 96%);
+    border-radius:2px 6px 6px 2px;
+    box-shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+  .broom .twigs::after{
+    /* binding around the twigs */
+    content:""; position:absolute; left:2px; top:5px;
+    width:5px; height:9px; background:var(--crimson-deep);
+    border-radius:1px;
+  }
+  .broom .spark{
+    position:absolute; left:-4px; top:2px;
+    width:6px; height:6px; border-radius:50%;
+    background:radial-gradient(circle, var(--candle) 0%, rgba(255,200,90,0) 70%);
+    filter:blur(1px);
+    animation:sparkpulse 1s ease-in-out infinite alternate;
+  }
+  @keyframes sparkpulse{0%{opacity:.4; transform:scale(.8)}100%{opacity:1; transform:scale(1.3)}}
+
+  /* — OWL (pure CSS, wing-flap) — */
+  .owl{width:54px; height:34px; transform-origin:50% 50%}
+  .owl .body{
+    position:absolute; left:8px; top:8px;
+    width:40px; height:24px;
+    background:radial-gradient(ellipse at 40% 30%, #5a4730 0%, #2e2415 80%);
+    border-radius:55% 55% 50% 50% / 60% 60% 45% 45%;
+    box-shadow:inset 0 -3px 4px rgba(255,255,255,.06), 0 2px 4px rgba(0,0,0,.5);
+  }
+  .owl .face{
+    position:absolute; left:30px; top:6px;
+    width:18px; height:16px;
+    background:radial-gradient(ellipse at 50% 50%, #6e5a3a 0%, #3a2c16 100%);
+    border-radius:50%;
+  }
+  .owl .eye{
+    position:absolute; top:6px;
+    width:6px; height:6px; border-radius:50%;
+    background:radial-gradient(circle, #ffb84d 0%, #c95a16 70%);
+    box-shadow:0 0 0 2px #1a130a;
+  }
+  .owl .eye.l{left:33px}
+  .owl .eye.r{left:40px}
+  .owl .beak{
+    position:absolute; left:36px; top:13px;
+    width:0; height:0;
+    border-left:4px solid transparent; border-right:4px solid transparent;
+    border-top:6px solid var(--gold);
+  }
+  .owl .wing{
+    position:absolute; left:14px; top:10px;
+    width:22px; height:18px;
+    background:linear-gradient(180deg, #4a3a22 0%, #221a0d 100%);
+    border-radius:60% 40% 40% 60% / 70% 50% 50% 70%;
+    transform-origin:left center;
+    animation:flap .42s ease-in-out infinite alternate;
+  }
+  @keyframes flap{
+    0%{transform:rotate(-8deg) scaleY(.95)}
+    100%{transform:rotate(20deg) scaleY(1.05)}
+  }
+  .owl .tuft{
+    position:absolute; left:32px; top:0;
+    width:2px; height:6px; background:#3a2c16;
+    border-radius:2px;
+    transform:rotate(-18deg);
+  }
+  .owl .tuft.r{left:38px; transform:rotate(18deg)}
+
+  /* flight paths — diagonal arcs across the viewport */
+  @keyframes flyLTR{ /* left-to-right, gentle downward arc */
+    0%{transform:translate(-15vw, 12vh) rotate(-4deg); opacity:0}
+    8%{opacity:.95}
+    50%{transform:translate(50vw, 30vh) rotate(-1deg)}
+    92%{opacity:.95}
+    100%{transform:translate(115vw, 52vh) rotate(2deg); opacity:0}
+  }
+  @keyframes flyRTL{ /* right-to-left, gentle upward arc (mirrored) */
+    0%{transform:translate(115vw, 60vh) rotate(176deg) scaleX(-1); opacity:0}
+    8%{opacity:.95}
+    50%{transform:translate(50vw, 40vh) rotate(178deg) scaleX(-1)}
+    92%{opacity:.95}
+    100%{transform:translate(-15vw, 18vh) rotate(182deg) scaleX(-1); opacity:0}
+  }
+  @keyframes flyTLBR{ /* top-left to bottom-right, steep diagonal */
+    0%{transform:translate(-12vw, -6vh) rotate(18deg); opacity:0}
+    10%{opacity:.95}
+    50%{transform:translate(48vw, 45vh) rotate(22deg)}
+    90%{opacity:.95}
+    100%{transform:translate(112vw, 92vh) rotate(26deg); opacity:0}
+  }
+  @keyframes flyTRBL{ /* top-right to bottom-left */
+    0%{transform:translate(112vw, 6vh) rotate(-18deg) scaleX(-1); opacity:0}
+    10%{opacity:.95}
+    50%{transform:translate(52vw, 40vh) rotate(-22deg) scaleX(-1)}
+    90%{opacity:.95}
+    100%{transform:translate(-12vw, 88vh) rotate(-26deg) scaleX(-1); opacity:0}
+  }
+
   .stage{position:relative; z-index:1; max-width:780px; margin:0 auto; padding:0 24px}
 
   .crest{
@@ -701,7 +823,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .candle, .star{display:none}
+    .candle, .star, .flyer{display:none}
     .letter{transition:none}
     .invitation{transition:none}
   }
@@ -713,6 +835,7 @@
 
 <div class="sky" id="sky"></div>
 <div class="stars" id="stars"></div>
+<div class="flyers" id="flyers" aria-hidden="true"></div>
 
 <div class="stage">
 
@@ -918,6 +1041,85 @@
       s.style.animationDelay=(Math.random()*4)+'s';
       st.appendChild(s);
     }
+  })();
+
+  // flying broomsticks & owls — appear occasionally and arc across the whole viewport
+  (function(){
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced) return;
+    const layer = document.getElementById('flyers');
+
+    const PATHS_BROOM = ['flyLTR', 'flyRTL', 'flyTLBR', 'flyTRBL'];
+    const PATHS_OWL   = ['flyLTR', 'flyRTL', 'flyTLBR', 'flyTRBL']; // same ships, both kinds ride them
+    // vertical offset presets so each path doesn't always start mid-edge
+    const VSHIFTS = ['0vh','8vh','-6vh','18vh','-10vh','24vh'];
+
+    function spawn(kind){
+      const el = document.createElement('div');
+      el.className = 'flyer';
+      // build the sprite
+      const sprite = document.createElement('div');
+      if(kind === 'broom'){
+        sprite.className = 'broom';
+        sprite.innerHTML = '<span class="shaft"></span><span class="twigs"></span><span class="spark"></span>';
+      } else {
+        sprite.className = 'owl';
+        sprite.innerHTML =
+          '<span class="body"></span><span class="face"></span>' +
+          '<span class="eye l"></span><span class="eye r"></span>' +
+          '<span class="beak"></span><span class="wing"></span>' +
+          '<span class="tuft"></span><span class="tuft r"></span>';
+      }
+      // pick a path and a small vertical offset so flights don't all trace the same line
+      const paths = kind === 'broom' ? PATHS_BROOM : PATHS_OWL;
+      const path = paths[Math.floor(Math.random()*paths.length)];
+      const vShift = VSHIFTS[Math.floor(Math.random()*VSHIFTS.length)];
+      el.style.top = vShift;
+
+      // flight duration — brooms faster than owls
+      const dur = kind === 'broom'
+        ? (8 + Math.random()*4)   // 8–12s
+        : (12 + Math.random()*6); // 12–18s
+      el.style.animation = `${path} ${dur}s linear forwards`;
+
+      // size variety
+      const scale = kind === 'broom'
+        ? (0.65 + Math.random()*0.5)
+        : (0.6 + Math.random()*0.55);
+      // apply scale as an inner transform so it doesn't override the flight transform
+      sprite.style.transform = `scale(${scale})`;
+      sprite.style.transformOrigin = 'center';
+
+      el.appendChild(sprite);
+      layer.appendChild(el);
+
+      // keep the DOM tidy — remove when the flight is done
+      el.addEventListener('animationend', () => el.remove(), {once:true});
+    }
+
+    // schedule occasional spawns — brooms every 18–40s, owls every 25–55s
+    function schedule(kind){
+      const delay = kind === 'broom'
+        ? (18000 + Math.random()*22000)
+        : (25000 + Math.random()*30000);
+      setTimeout(() => {
+        spawn(kind);
+        schedule(kind);
+      }, delay);
+    }
+    // first ones appear quickly so the page feels alive, then they space out
+    setTimeout(() => spawn('broom'), 2500);
+    setTimeout(() => spawn('owl'),  9000);
+    setTimeout(() => spawn('owl'), 30000);
+    schedule('broom');
+    schedule('owl');
+    // occasionally two at once for a little charm
+    setInterval(() => {
+      if(Math.random() < 0.25){
+        spawn('broom');
+        setTimeout(() => spawn('owl'), 1200 + Math.random()*2000);
+      }
+    }, 45000);
   })();
 
   // break the seal
