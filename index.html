@@ -2146,46 +2146,70 @@
           quiz_answers: document.getElementById('houseAnswers').value || ''
         };
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending your owl…';
+        submitBtn.style.visibility = 'hidden';
+
+        const rect = submitBtn.getBoundingClientRect();
+        const size = 600;
+        const anim = document.createElement('dotlottie-wc');
+        anim.setAttribute('autoplay', '');
+        anim.setAttribute('src', 'https://lottie.host/cc0df7fd-988b-4617-baa2-e0ef756de7e8/d0QremTz8S.lottie');
+        anim.style.cssText =
+          'position:fixed;left:' + (rect.left + rect.width / 2 - size / 2) + 'px;' +
+          'top:' + (rect.top + rect.height / 2 - size / 2) + 'px;' +
+          'width:' + size + 'px;height:' + size + 'px;z-index:99998;transition:opacity 1s ease';
+        document.body.appendChild(anim);
+
+        let animDone = false;
+        let fetchDone = false;
+        let fetchOk = false;
+
+        function done() {
+          if (!animDone || !fetchDone) return;
+          anim.style.opacity = '0';
+          setTimeout(function () {
+            anim.remove();
+            if (fetchOk) {
+              form.style.display = 'none';
+              reply.classList.add('show');
+              reply.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+              submitBtn.style.visibility = 'visible';
+              submitBtn.disabled = false;
+              submitBtn.textContent = submitLabel;
+              const subject = encodeURIComponent(data._subject);
+              const body = encodeURIComponent(
+                'Name: ' + data.guest_name + '\nArrival: ' + data.arrival + '\n' +
+                'House: ' + data.sorting_result + '\nTally: ' + data.quiz_tally + '\n' +
+                'Answers: ' + data.quiz_answers + '\nNote: ' + data.note_for_anastasia
+              );
+              reply.querySelector('.small').innerHTML =
+                'The owl couldn\'t fly on its own — <a href="mailto:' + ANASTASIA_EMAIL + '?subject=' + subject + '&body=' + body + '" style="color:var(--crimson-deep); text-decoration:underline">click here to send it manually</a>.';
+              form.style.display = 'none';
+              reply.classList.add('show');
+            }
+          }, 1000);
+        }
+
+        customElements.whenDefined('dotlottie-wc').then(function () {
+          anim.dotLottie.addEventListener('complete', function () {
+            animDone = true;
+            done();
+          });
+        });
 
         fetch(FORMSPREE_ENDPOINT, {
           method: 'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
-        }).then(r => {
+        }).then(function (r) {
           if (!r.ok) throw new Error('network');
-          form.style.display = 'none';
-          const rsvpWrap = form.parentNode;
-          const anim = document.createElement('dotlottie-wc');
-          anim.setAttribute('autoplay', '');
-          anim.setAttribute('src', 'https://lottie.host/cc0df7fd-988b-4617-baa2-e0ef756de7e8/d0QremTz8S.lottie');
-          anim.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;z-index:99998;transition:opacity 1s ease';
-          rsvpWrap.insertBefore(anim, reply);
-          customElements.whenDefined('dotlottie-wc').then(() => {
-            anim.dotLottie.addEventListener('complete', function done() {
-              anim.style.opacity = '0';
-              setTimeout(() => {
-                anim.remove();
-                reply.classList.add('show');
-                reply.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }, 1000);
-            });
-          });
-        }).catch(() => {
-          // graceful fallback: open a prefilled email so the guest's answers still reach Anastasia
-          submitBtn.disabled = false;
-          submitBtn.textContent = submitLabel;
-          const subject = encodeURIComponent(data._subject);
-          const body = encodeURIComponent(
-            `Name: ${data.guest_name}\nArrival: ${data.arrival}\n` +
-            `House: ${data.sorting_result}\nTally: ${data.quiz_tally}\n` +
-            `Answers: ${data.quiz_answers}\nNote: ${data.note_for_anastasia}`
-          );
-          reply.querySelector('.small').innerHTML =
-            `The owl couldn't fly on its own — <a href="mailto:${ANASTASIA_EMAIL}?subject=${subject}&body=${body}" style="color:var(--crimson-deep); text-decoration:underline">click here to send it manually</a>.`;
-          form.style.display = 'none';
-          reply.classList.add('show');
+          fetchDone = true;
+          fetchOk = true;
+          done();
+        }).catch(function () {
+          fetchDone = true;
+          fetchOk = false;
+          done();
         });
       });
     })();
