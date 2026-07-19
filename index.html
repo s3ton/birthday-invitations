@@ -502,7 +502,7 @@
       font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .28em;
-      font-size: 12px;
+      font-size: 18px;
       color: var(--crimson-deep);
       margin-bottom: 8px;
     }
@@ -510,7 +510,7 @@
     .detail .value {
       font-family: "Harry P", "Cinzel", serif;
       font-weight: 500;
-      font-size: 22px;
+      font-size: 26px;
       color: var(--ink);
       line-height: 1.25;
     }
@@ -1563,11 +1563,7 @@
                 <span id="quizTriggerLabel">Take the Sorting Quiz</span>
               </button>
               <div class="quiz-resultline" id="quizResultline">
-                The hat whispered: <b id="quizResultName">...</b><br>
-                <span
-                  style="font-size:13px; font-style:normal; letter-spacing:.18em; text-transform:uppercase; font-family:"
-                  EB Garamond",serif; font-variant:small-caps; color:var(--ink-soft)">Anastasia will confirm the final
-                  sorting at the feast</span>
+                <span style="font-size:13px; font-style:normal; letter-spacing:.18em; text-transform:uppercase; font-family:"EB Garamond",serif; font-variant:small-caps; color:var(--ink-soft)">The Sorting Hat has tucked your answers away — your house will be revealed at the feast ✨</span>
               </div>
               <input type="hidden" id="houseResult" name="house" value="" />
               <input type="hidden" id="houseAnswers" name="quiz_answers" value="" />
@@ -1978,7 +1974,7 @@
       result.innerHTML = `
       <div class="result-hat">🎩</div>
       <div class="result-eyebrow">The Sorting Hat has whispered</div>
-      <div class="result-house">... sealed ...</div>
+      <div class="result-house">The Sorting Hat will share its decision at the feast — no peeking! 🎩✨</div>
       <div class="result-credo">Your answers are sealed and flown to Anastasia.<br>The Hat will reveal your house at the start of the feast — no peeking before then.</div>
       <div class="result-fin">Until then: minds sharp, wands ready.</div>
       <button class="result-confirm" id="resultConfirm">Done — back to the invitation</button>`;
@@ -2040,7 +2036,6 @@
 
         // stash into the RSVP form hidden fields — real traits, no position letters
         document.getElementById('houseResult').value = info.name;
-        document.getElementById('quizResultName').textContent = info.name;
         document.getElementById('houseAnswers').value =
           answers.map((a, i) => `Q${i + 1}=${a || '—'}`).join(' | ');
         document.getElementById('houseTally').value =
@@ -2128,7 +2123,7 @@ Note: ${(form.elements.note && form.elements.note.value) || '—'}`
         const size = 600;
         const anim = document.createElement('dotlottie-wc');
         anim.setAttribute('autoplay', '');
-        anim.setAttribute('src', 'https://lottie.host/cc0df7fd-988b-4617-baa2-e0ef756de7e8/d0QremTz8S.lottie');
+        anim.setAttribute('src', 'https://lottie.host/2d5752e4-480f-4418-a6da-492e46ca0a41/MGAoXABH6P.lottie');
         anim.style.cssText =
           'position:fixed;left:' + (rect.left + rect.width / 2 - size / 2) + 'px;' +
           'top:' + (rect.top + rect.height / 2 - size / 2) + 'px;' +
