@@ -1744,7 +1744,7 @@
     //    https://web3forms.com/dashboard (just enter the same email to log in).
     //
     const WEB3FORMS_ACCESS_KEY = "709204e8-fd49-4980-be36-bb2463912efb";
-    const ANASTASIA_EMAIL = "s3tonhs@gmail.com";             // <- replace this
+    const ANASTASIA_EMAIL = "lorenzoafb@gmail.com";             // <- replace this
 
     const QUIZ = [
       {
@@ -2037,23 +2037,6 @@
         const t = tally();
         const winner = topHouse(t);
         const info = HOUSES_BY_NAME[winner];
-        document.getElementById('resultHouse').textContent = info.name;
-        document.getElementById('resultHouse').style.color = info.color;
-        document.getElementById('resultCredo').textContent = info.credo;
-        const sc = document.getElementById('resultScores');
-        sc.innerHTML = '';
-        TRAITS.forEach(k => {
-          const h = HOUSES_BY_NAME[k];
-          const row = document.createElement('div');
-          row.className = 'score-row';
-          row.innerHTML = `
-          <span class="score-name" style="color:${h.color}">${h.name}</span>
-          <span class="score-track"><span class="score-fill" style="background:${h.color}"></span></span>
-          <span class="score-n">${t[k]}</span>`;
-          sc.appendChild(row);
-          // animate fill widths after a tick
-          requestAnimationFrame(() => { row.querySelector('.score-fill').style.width = Math.round((t[k] / QUIZ.length) * 100) + '%'; });
-        });
 
         // stash into the RSVP form hidden fields — real traits, no position letters
         document.getElementById('houseResult').value = info.name;
@@ -2098,8 +2081,26 @@
 
       form.addEventListener('submit', e => {
         e.preventDefault();
-        const name = form.name.value.trim();
-        if (!name) { form.name.focus(); return; }
+        const nameInput = form.elements.name;
+        const name = (nameInput && nameInput.value && nameInput.value.trim()) || '';
+        if (!name) { if (nameInput) nameInput.focus(); return; }
+
+        // Quiz must be fully completed before the owl can be sent.
+        // Source of truth: the trigger button CTA says "Quiz done" —
+        // that only happens when the user clicks through the full quiz.
+        if (!document.getElementById('quizTrigger').classList.contains('done')) {
+          const msg = document.createElement('div');
+          msg.className = 'quiz-required-msg';
+          msg.textContent = 'The Sorting Hat wants a word first — please complete the quiz before sending your owl.';
+          msg.style.cssText = 'color:var(--crimson-deep); margin:8px 0 0; font-size:13px; letter-spacing:.02em;';
+          const trigger = document.getElementById('quizTrigger');
+          const prev = form.querySelector('.quiz-required-msg');
+          if (prev) prev.remove();
+          trigger.parentNode.insertBefore(msg, trigger.nextSibling);
+          trigger.focus();
+          trigger.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return; // stop here — animation must NOT fire
+        }
 
         const house = document.getElementById('houseResult').value || '(quiz not taken)';
         const tally = document.getElementById('houseTally').value || '';
@@ -2108,17 +2109,17 @@
         const data = {
           _subject: `Owl from ${name} — Anastasia's Birthday`,
           name,
-          arrival: form.arrive.value,
-          note: form.note.value || '—',
+          arrival: (form.elements.arrive && form.elements.arrive.value) || 'not specified',
+          note: (form.elements.note && form.elements.note.value) || '—',
           house,
           quiz_tally: tally,
           full_details:
             `Name: ${name}
-Arrival: ${form.arrive.value}
+Arrival: ${(form.elements.arrive && form.elements.arrive.value) || 'not specified'}
 House: ${house}
 Tally: ${tally}
 Answers: ${answers}
-Note: ${form.note.value || '—'}`
+Note: ${(form.elements.note && form.elements.note.value) || '—'}`
         };
 
         submitBtn.style.visibility = 'hidden';
@@ -2137,6 +2138,12 @@ Note: ${form.note.value || '—'}`
         let animDone = false;
         let fetchDone = false;
         let fetchOk = false;
+
+        function markAnimDone() {
+          if (animDone) return;
+          animDone = true;
+          done();
+        }
 
         function done() {
           if (!animDone || !fetchDone) return;
@@ -2161,12 +2168,16 @@ Note: ${form.note.value || '—'}`
           }, 1000);
         }
 
+        // Fallback so the UI always finishes even if the Lottie never loads/fires
+        // (CDN blocked, slow connection, custom element never defined, etc.)
+        const animTimer = setTimeout(markAnimDone, 2500);
+
         customElements.whenDefined('dotlottie-wc').then(function () {
           anim.dotLottie.addEventListener('complete', function () {
-            animDone = true;
-            done();
+            clearTimeout(animTimer);
+            markAnimDone();
           });
-        });
+        }).catch(function () { clearTimeout(animTimer); markAnimDone(); });
 
         fetch("https://api.web3forms.com/submit", {
           method: 'POST',
