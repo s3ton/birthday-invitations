@@ -29,6 +29,14 @@
       --night: #0c0a06;
     }
 
+    @font-face {
+      font-family: "Harry P";
+      src: url("HARRYP__.TTF") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
     * {
       box-sizing: border-box
     }
@@ -197,7 +205,7 @@
 
     .crest {
       margin: 64px auto 0;
-      font-family: "EB Garamond", serif;
+      font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .42em;
       font-size: 13px;
@@ -255,7 +263,7 @@
     }
 
     .letter .line-top {
-      font-family: "EB Garamond", serif;
+      font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .3em;
       font-size: 13px;
@@ -264,7 +272,7 @@
     }
 
     .letter h1 {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 700;
       font-size: 30px;
       line-height: 1.1;
@@ -343,7 +351,7 @@
     }
 
     .seal .mono {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 900;
       color: var(--gold-bright);
       font-size: 42px;
@@ -422,7 +430,7 @@
     }
 
     .toptitle {
-      font-family: "EB Garamond", serif;
+      font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .35em;
       font-size: 13px;
@@ -431,7 +439,7 @@
     }
 
     .scroll h2 {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 900;
       font-size: clamp(34px, 8vw, 56px);
       line-height: 1.02;
@@ -443,7 +451,8 @@
     .scroll h2 .gold {
       color: var(--gold);
       font-style: italic;
-      font-weight: 700
+      font-weight: 700;
+      font-size: .6em
     }
 
     .lead {
@@ -490,7 +499,7 @@
     }
 
     .detail .label {
-      font-family: "EB Garamond", serif;
+      font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .28em;
       font-size: 12px;
@@ -499,7 +508,7 @@
     }
 
     .detail .value {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 500;
       font-size: 22px;
       color: var(--ink);
@@ -530,7 +539,7 @@
     }
 
     .house .h {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 700;
       font-size: 15px;
       letter-spacing: .06em;
@@ -657,7 +666,7 @@
     }
 
     .rsvp-wrap h3 {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 700;
       color: var(--crimson-deep);
       font-size: 26px;
@@ -927,7 +936,7 @@
     }
 
     .modal-head .eb {
-      font-family: "EB Garamond", serif;
+      font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .32em;
       font-size: 12px;
@@ -935,7 +944,7 @@
     }
 
     .modal-head h3 {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 900;
       font-size: clamp(24px, 5vw, 32px);
       color: var(--ink);
@@ -1196,7 +1205,7 @@
     }
 
     .result-house {
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 900;
       font-size: 38px;
       margin: 10px 0 6px;
@@ -1228,7 +1237,7 @@
     .score-name {
       flex: 0 0 96px;
       text-align: left;
-      font-family: "Cinzel", serif;
+      font-family: "Harry P", "Cinzel", serif;
       font-weight: 600;
       font-size: 13px;
     }
@@ -1398,7 +1407,7 @@
       position: relative;
       z-index: 1;
       padding: 30px 24px 60px;
-      font-family: "EB Garamond", serif;
+      font-family: "Harry P", "EB Garamond", serif;
       font-variant: small-caps;
       letter-spacing: .24em;
       font-size: 12px;
@@ -1496,12 +1505,12 @@
     <!-- THE REVEAL -->
     <section class="invitation" id="invitation" aria-label="Invitation">
       <div class="scroll">
-        <div class="toptitle">The Headmistress's Office · October</div>
-        <h2>Anastasia turns a year older<br><span class="gold">— a feast is called —</span></h2>
+        <div class="toptitle">The Headmaster's Office</div>
+        <h2>Wizardy Birthday of Anastasia<br><span class="gold">— a feast is called —</span></h2>
         <p class="lead">
           Dear cherished guest — you are cordially summoned to an evening where
-          <b>birthday</b> meets <b>Halloween</b>, where the candles float and the
-          butterbeer flows. Robes optional, nonsense mandatory.
+          <b><i>birthday</i></b> meets <b><i>Halloween</i></b>, where the candles float and the
+          butterbeer flows!
         </p>
 
         <div class="divider"></div>
@@ -1509,30 +1518,19 @@
         <div class="details">
           <div class="detail">
             <div class="label">When the owl finds you</div>
-            <div class="value">Saturday · 31st of October<br>Halloween night, after dusk</div>
+            <div class="value">Saturday · 31st of October<br>Halloween night, 4 p.m.</div>
             <div class="note">Arrive when the jack-o'-lanterns grin.</div>
           </div>
           <div class="detail">
             <div class="label">Where the floo takes you</div>
-            <div class="value">Our apartment, Via Fontanile 24</div>
-            <div class="note">Tap the brick wall thrice — or just ring the bell.</div>
+            <div class="value">Hogwarts Department in Cologno Monzese, Via Fontanile 24</div>
+            <div class="note">Don't forget the password or the Fat Lady will not give you the way</div>
           </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="detail">
-          <div class="label">From the kitchens — the feast</div>
-          <ul class="menu" style="margin-top:10px">
-            <li><span class="name">Butterbeer</span><span class="dots"></span><span class="tag">House Special</span>
-            </li>
-            <li><span class="name">Chocolate Frogs</span><span class="dots"></span><span class="tag">Sweet</span></li>
-            <li><span class="name">Pumpkin Pasties</span><span class="dots"></span><span class="tag">Halloween</span>
-            </li>
-            <li><span class="name">Cauldron Cakes</span><span class="dots"></span><span class="tag">Cursed</span></li>
-            <li><span class="name">Treacle & Treacle Tart</span><span class="dots"></span><span
-                class="tag">Anastasia's</span></li>
-          </ul>
+          <div class="detail">
+            <div class="label">Dresscode</div>
+            <div class="value">Harry Potter's Wizard's robe</div>
+            <div class="note">You can come as your favourite character or as a witch or wizard</div>
+          </div>
         </div>
 
         <div class="divider"></div>
@@ -1541,34 +1539,9 @@
           <div class="label">The evening's enchantments</div>
           <div class="games">
             <div class="game">Sorting Ceremony — discover the house that chooses you</div>
-            <div class="game">Wand-Choosing — find the wand that picks you back</div>
-            <div class="game">Potions Class — a brewing contest, judged mercilessly</div>
+            <div class="game">Three Wizard's Tournament</div>
+            <div class="game">Quidditch exhibition match</div>
             <div class="game">Costume Prizes — best Harry Potter & best Halloween look</div>
-            <div class="game">Floating Candles & Photo Corner — come robed, leave photographed</div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="detail">
-          <div class="label">Where you belong — though you may not choose it</div>
-          <div class="house-grid">
-            <div class="house gryff">
-              <div class="h"><span class="swatch"></span> Gryffindor</div>
-              <div class="desc">Bravery at the door, drinks on the table.</div>
-            </div>
-            <div class="house slyth">
-              <div class="h"><span class="swatch"></span> Slytherin</div>
-              <div class="desc">Ambitious mixologists and quiet plotters.</div>
-            </div>
-            <div class="house raven">
-              <div class="h"><span class="swatch"></span> Ravenclaw</div>
-              <div class="desc">Solvers of the riddles, keepers of trivia.</div>
-            </div>
-            <div class="house huff">
-              <div class="h"><span class="swatch"></span> Hufflepuff</div>
-              <div class="desc">Loyal friends of the birthday witch.</div>
-            </div>
           </div>
         </div>
 
@@ -1576,21 +1549,12 @@
 
         <!-- RSVP -->
         <div class="rsvp-wrap">
-          <h3>Send your owl</h3>
+          <h3>Take the sorting quiz and send your owl</h3>
           <p class="hint">The Sorting Hat would like a word before the feast.</p>
           <form id="rsvpForm" novalidate>
             <div class="field">
               <label for="name">Your name</label>
               <input type="text" id="name" name="name" placeholder="e.g. Hermione Granger" required />
-            </div>
-            <div class="field">
-              <label for="arrive">I'll appear</label>
-              <select id="arrive" name="arrive">
-                <option>On the dot of dusk</option>
-                <option>Fashionably late</option>
-                <option>By broomstick, arrival uncertain</option>
-                <option>Cannot make it — sending patronus</option>
-              </select>
             </div>
             <div class="field">
               <label>Which house are you?</label>
@@ -1623,7 +1587,7 @@
 
         <div class="signoff">
           <span class="by">hosted by</span>
-          Anastasia's circle · Via Fontanile 24
+          Hogwarts Department in Cologno Monzese · Via Fontanile 24
         </div>
       </div>
     </section>
@@ -1771,13 +1735,15 @@
       seal.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     })();
 
-    // RSVP + Sorting Quiz — emails Anastasia via Formspree.
+    // RSVP + Sorting Quiz — emails Anastasia via Web3Forms.
     //
-    // 1. Go to https://formspree.io and sign up with Anastasia's email (free plan = 50 submissions/month).
-    // 2. Create a new form — Formspree will give you a URL like https://formspree.io/f/abcdwxyz
-    // 3. Paste that URL below, and put her email below too (used as the manual fallback).
+    // 1. Go to https://web3forms.com and enter Anastasia's email (chubarova21a@gmail.com).
+    // 2. Web3Forms will email you a free access key (no signup, no dashboard needed).
+    // 3. Paste that key below into WEB3FORMS_ACCESS_KEY.
+    // 4. Submissions are delivered to Anastasia's inbox; you can also view them at
+    //    https://web3forms.com/dashboard (just enter the same email to log in).
     //
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mpqvdrgd"; // <- replace this
+    const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE";          // <- replace this
     const ANASTASIA_EMAIL = "chubarova21a@gmail.com";             // <- replace this
 
     const QUIZ = [
@@ -2135,15 +2101,24 @@
         const name = form.name.value.trim();
         if (!name) { form.name.focus(); return; }
 
+        const house = document.getElementById('houseResult').value || '(quiz not taken)';
+        const tally = document.getElementById('houseTally').value || '';
+        const answers = document.getElementById('houseAnswers').value || '';
+
         const data = {
           _subject: `Owl from ${name} — Anastasia's Birthday`,
-          _template: 'table',
-          guest_name: name,
+          name,
           arrival: form.arrive.value,
-          note_for_anastasia: form.note.value,
-          sorting_result: document.getElementById('houseResult').value || '(quiz not taken)',
-          quiz_tally: document.getElementById('houseTally').value || '',
-          quiz_answers: document.getElementById('houseAnswers').value || ''
+          note: form.note.value || '—',
+          house,
+          quiz_tally: tally,
+          full_details:
+            `Name: ${name}
+Arrival: ${form.arrive.value}
+House: ${house}
+Tally: ${tally}
+Answers: ${answers}
+Note: ${form.note.value || '—'}`
         };
 
         submitBtn.style.visibility = 'hidden';
@@ -2177,11 +2152,7 @@
               submitBtn.disabled = false;
               submitBtn.textContent = submitLabel;
               const subject = encodeURIComponent(data._subject);
-              const body = encodeURIComponent(
-                'Name: ' + data.guest_name + '\nArrival: ' + data.arrival + '\n' +
-                'House: ' + data.sorting_result + '\nTally: ' + data.quiz_tally + '\n' +
-                'Answers: ' + data.quiz_answers + '\nNote: ' + data.note_for_anastasia
-              );
+              const body = encodeURIComponent(data.full_details);
               reply.querySelector('.small').innerHTML =
                 'The owl couldn\'t fly on its own — <a href="mailto:' + ANASTASIA_EMAIL + '?subject=' + subject + '&body=' + body + '" style="color:var(--crimson-deep); text-decoration:underline">click here to send it manually</a>.';
               form.style.display = 'none';
@@ -2197,12 +2168,15 @@
           });
         });
 
-        fetch(FORMSPREE_ENDPOINT, {
+        fetch("https://api.web3forms.com/submit", {
           method: 'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify(Object.assign({ access_key: WEB3FORMS_ACCESS_KEY }, data))
         }).then(function (r) {
           if (!r.ok) throw new Error('network');
+          return r.json().catch(function () { return { success: true }; });
+        }).then(function (json) {
+          if (json && json.success === false) throw new Error(json.message || 'rejected');
           fetchDone = true;
           fetchOk = true;
           done();
