@@ -85,7 +85,8 @@ body.opening .envelope-card{transform:translateY(-70%)}
 body.opening .seal-hint,body.opened .seal-hint{opacity:0;transform:translateX(-50%) translateY(8px);pointer-events:none}
 body.opened .letter-stack{opacity:0;pointer-events:none;transition:opacity .5s ease}
 body.opened .seal-container{opacity:0;pointer-events:none}
-.invitation{position:relative;margin:-40px auto 0;padding:0;opacity:0;transform:translateY(30px);transition:opacity 1s ease .3s,transform 1s ease .3s;pointer-events:none}
+.invitation{display:none;position:relative;margin:-40px auto 0;padding:0;opacity:0;transform:translateY(30px);transition:opacity 1s ease .3s,transform 1s ease .3s;pointer-events:none}
+body.opening .invitation,body.opened .invitation{display:block}
 body.opened .invitation{opacity:1;transform:translateY(0);pointer-events:auto}
 .scroll{background:linear-gradient(180deg,var(--parchment) 0%,var(--parchment-2) 50%,var(--parchment) 100%);color:var(--ink);padding:56px 48px 64px;border-radius:4px;box-shadow:0 0 0 1px rgba(120,90,40,.25),0 40px 80px rgba(0,0,0,.5),inset 0 0 60px rgba(216,197,142,.4);position:relative}
 .scroll::before,.scroll::after{content:"";position:absolute;left:0;right:0;height:24px;background:repeating-linear-gradient(90deg,rgba(58,44,22,.25) 0 1px,transparent 1px 8px)}
