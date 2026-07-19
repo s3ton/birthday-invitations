@@ -1657,7 +1657,7 @@
       var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReduced) return;
       var atmosphere = document.getElementById('pops');
-      var GAP_MS = 2000; // gap between appearances after each one-shot finishes
+      var GAP_MS = 8000; // gap between appearances after each one-shot finishes
 
       customElements.whenDefined("dotlottie-wc").then(function () {
         var pool = [
